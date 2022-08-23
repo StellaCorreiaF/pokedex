@@ -1,7 +1,10 @@
 const express = require('express'); 
+const routes = require('./routes');
 class App {
     constructor(){
         this.server = express(); 
+        this.middlewares();
+        this.routes();
 
     }
     middlewares() {
@@ -9,7 +12,7 @@ class App {
 
     }
     routes(){
-        this.server.use(this.routes);
+        this.server.use(routes);
 
     }
 }
