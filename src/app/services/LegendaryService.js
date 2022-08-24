@@ -1,6 +1,6 @@
 const LegendaryModel = require('../models/LegendaryModel'); 
 
-const LegendaryService = {
+const legendaryService = {
     listLegendaryService: () => {
         const pokemon = new LegendaryModel
         (1, 'MewTwo', 'Desc', 'pokemon')
@@ -11,9 +11,9 @@ const LegendaryService = {
 
     },
     listPokemonData: (pokemonName)=> {
-        const pokemonList = LegendaryService.listLegendaryService();
+        const pokemonList = legendaryService.listLegendaryService();
         const pokemon = pokemonList.find(item => item.name === pokemonName)
         return pokemon; 
     }
 }
-module.exports = LegendaryService; 
+module.exports = legendaryService; 

@@ -9,12 +9,14 @@ class App {
     }
     middlewares() {
         this.server.use(express.json());
+        //middlewares interceptam as requisições do express para que o express possa interpretá-las
+        
 
     }
     routes(){
         this.server.use(routes);
-
+        // rotas são os métodos http
     }
 }
 module.exports = new App().server; 
-//dentro da classe, so estou exportando o server, que é quem roteia o express
+//dentro da classe, so estou exportando o server, que é quem roteia o express e comunica com a aplicação
