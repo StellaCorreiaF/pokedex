@@ -1,10 +1,12 @@
 const express = require('express'); 
 const routes = require('./routes');
+
 class App {
     constructor(){
         this.server = express(); 
         this.middlewares();
         this.routes();
+        
 
     }
     middlewares() {
@@ -18,5 +20,4 @@ class App {
         // rotas são os métodos http
     }
 }
-module.exports = new App().server; 
-//dentro da classe, so estou exportando o server, que é quem roteia o express e comunica com a aplicação
+module.exports = new App().server;
