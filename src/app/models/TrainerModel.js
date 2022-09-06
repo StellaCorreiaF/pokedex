@@ -5,7 +5,8 @@ class TrainerModel extends Model {
             id: Sequelize.UUIDV4(),
             name: Sequelize.STRING,
             email: Sequelize.STRING,
-            password: Sequelize.STRING
+            password: Sequelize.STRING,
+            age: Sequelize.SMALLINT
 
         }, {
            sequelize 

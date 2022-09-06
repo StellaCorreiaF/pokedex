@@ -1,4 +1,4 @@
-const trainerService = require('../../services/Trainer/TrainerService'); 
+const trainerService = require('../../services/Trainer/TrainerService');
 
 const update = require('../../services/Trainer/UpdateTrainerService');
 const deleteLegendary = require('../../services/Trainer/DeleteTrainerService');
@@ -7,56 +7,65 @@ const createTrainerService = require('../../services/Trainer/CreateTrainerServic
 
 
 const trainerController = {
-    listAll: (request, response) => {
-        const trainers = trainerService.listAll()
-        return response.send(trainers)
-      }, 
-    listData: (request, response) => {
-        const { name } = request.query; 
-        if(!name){
-            return response.status(400).json({"erro" : "Você não informou o nome do trainer"})
-        }
-        const trainer = trainerService.listData(name);
-        response.json(trainer);
-    },
-    create: (request, response) => {
-        const {
-            name,
-            email,
-            password           
-          } = request.body
-            if (!name) {
-            return response.status(400).json({
-              message: "Nome é obrigatório"
-            })
-          }
+  listAll: (request, response) => {
+    const trainers = trainerService.listAll()
 
-        const createdTrainer = createTrainerService.create(name, email, password, age, city)
+    return response.send(trainers)
+  },
+  create: (request, response) => {
+    const {
+      name,
+      email,
+      password,
+      age
+    } = request.body
 
-            if (!createdTrainer.sucess) {
-            return response.status(400).json(createdTrainer.message)
+    if (!name) {
+      return response.status(400).json({
+        message: "Nome é obrigatório"
+      })
     }
+
+    if (!age) {
+      return response.status(400).json({
+        message: "Idade é obrigatório"
+      })
+    }
+
+    const createdTrainer = CreateTrainerService.create(name, email, password, age)
+
+    if (!createdTrainer.sucess) {
+      return response.status(400).json(createdTrainer.message)
+    }
+
     return response.status(200).json(createdTrainer.message)
+  },
+  update: (request, response) => {
+    const { id } = request.params
+    const {
+      name,
+      age
+    } = request.body
 
-    },
-    update: (request, response) => {
-        const { id } = request.params; 
-        const {
-            name, 
-            email,
-            password
-        } = request.body;
-        const updateTrainer = update.update(id, name, email, password);
-        response.json(updateTrainer
-);
-
-        
-    },
-    delete: (request, response)=> {
-        const{ id } = request.params; 
-        const deletedTrainer = deleteLegendary.delete(id);
-        response.send(deletedTrainer);
+    if (!name) {
+      return response.status(400).json({
+        message: "Nome é obrigatório"
+      })
     }
 
+    if (!age) {
+      return response.status(400).json({
+        message: "Idade é obrigatório"
+      })
+    }
+
+    const updatedTrainer = UpdateTrainerService.update(id, name, age, city)
+
+    if (!updatedTrainer.sucess) {
+      return response.status(400).json(updatedTrainer.message)
+    }
+
+    return response.status(200).json(updatedTrainer.message)
+  }
 }
 module.exports = trainerController; 
