@@ -1,7 +1,9 @@
-const Router= require('express');
-const multer = require('multer') 
-const multerConfig = require('./config/multer')
-const legendaryValidator = require('./middlewares/LegendaryValidator');
+//const Router= require('express');  - Refatorando, import
+import Router from 'express';
+import multer from 'multer';
+import multerConfig from './config/multer';
+import legendaryValidator from './middlewares/LegendaryValidator';
+
 
 const legendaryController = require('./app/controllers/Legendary/LegendaryController');
 const trainerController = require('./app/controllers/Trainer/TrainerController');

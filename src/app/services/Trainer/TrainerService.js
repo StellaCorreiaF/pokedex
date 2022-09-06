@@ -1,4 +1,5 @@
-const trainerModel = require('../../models/TrainerModel'); 
+import trainerModel from "../../models/TrainerModel"
+
 const listTrainerService = {
     listAll: () => {
       const trainers = [
@@ -24,4 +25,4 @@ const listTrainerService = {
       return trainer
     }
   }
-module.exports = listTrainerService; 
+export default listTrainerService; 

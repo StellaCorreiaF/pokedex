@@ -1,5 +1,6 @@
-const trainerModel = require('../../models/TrainerModel');
-const { v4} = require('uuid');
+
+import trainerModel from '../../models/TrainerModel';
+import { v4} from 'uuid';
 
 const createTrainerService = {
     createTrainer: (
@@ -19,4 +20,4 @@ const createTrainerService = {
     }  
 }
 
-module.exports = createTrainerService; 
+export default createTrainerService; 

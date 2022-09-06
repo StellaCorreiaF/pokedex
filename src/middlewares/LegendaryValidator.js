@@ -42,4 +42,4 @@ return response.status(400).json({
   next();
 }
 
-module.exports = legendaryValidator;
+export default legendaryValidator;

@@ -1,4 +1,4 @@
-const list = require('../../services/Trainer/TrainerService');
+import listTrainerService from "./TrainerService";
 const updateTrainerService= {
     update: (
         id,
@@ -6,7 +6,7 @@ const updateTrainerService= {
         email,
         password
     ) => {
-        const trainers = list.listTrainerService();
+        const trainers = listTrainerService.listTrainerService();
         const trainerIndice = trainers.findIndex(item => item.id === Number(id))
         if(trainerIndice === -1){
             return { erro: "Trainer não encontrado"}
@@ -24,4 +24,4 @@ const updateTrainerService= {
         
     }
 }
-module.exports = updateTrainerService;
+export default updateTrainerService;

@@ -1,9 +1,8 @@
-const trainerService = require("./TrainerService")
-
+import listTrainerService from "./TrainerService";
 const deleteTrainerService = {
     delete: (id) => {
-        const trainerList = trainerService.listTrainerService();
-        const trainerIndice = trainerList.findIndex(item => item.id === Number(id));
+        const trainerList = listTrainerService.listTrainerService();
+        const trainerIndice = listTrainerService.findIndex(item => item.id === Number(id));
 
         if(trainerIndice ===-1){
             return {erro: "Trainer não existe"}
@@ -13,4 +12,4 @@ const deleteTrainerService = {
         return { mensagem: "Trainer removido"}
     }
 }
-module.exports = deleteTrainerService ; 
+export default deleteTrainerService ; 
