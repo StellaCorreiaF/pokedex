@@ -8,13 +8,13 @@ const sessionController = {
         const { email, password } = request.body; 
 
         const trainer = listTrainer.findTrainer(email, password)
-        if(trainer.password !== password){
-            return response.status(401).json({error: "password incorreto"})
-        } 
+
         if(!trainer ){
             return response.status(401).json({error : "treinador não encontrado"})
         }
-        
+        if(trainer.password !== password){
+            return response.status(401).json({error: "password incorreto"})
+        } 
         const { id , name } = trainer; 
 
         return response.json({
