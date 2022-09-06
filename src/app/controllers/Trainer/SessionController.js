@@ -3,8 +3,9 @@ const listTrainer  = require('../../services/Trainer/TrainerService');
 const controller = require('../Trainer/TrainerController');
 const yup = require('yup');
 
-const sessionController = {
-    create(request, response) {
+class SessionController{
+    constructor (){};
+   static create(request, response) {
         const { email, password } = request.body; 
 
         const trainer = listTrainer.findTrainer(email, password)
@@ -28,4 +29,4 @@ const sessionController = {
 
 }
 
-module.exports = sessionController; 
+module.exports = SessionController; 
