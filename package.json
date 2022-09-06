@@ -27,5 +27,8 @@
     "uuid": "^8.3.2",
     "uuidv4": "^6.2.13",
     "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "sucrase": "^3.25.0"
   }
 }
