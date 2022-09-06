@@ -6,13 +6,14 @@ const createTrainerService = require('../../services/Trainer/CreateTrainerServic
 
 
 
-const trainerController = {
-  listAll: (request, response) => {
+class TrainerController  {
+  constructor(){}
+  listAll (request, response) {
     const trainers = trainerService.listAll()
 
     return response.send(trainers)
-  },
-  create: (request, response) => {
+  }
+  create (request, response) {
     const {
       name,
       email,
@@ -39,8 +40,8 @@ const trainerController = {
     }
 
     return response.status(200).json(createdTrainer.message)
-  },
-  update: (request, response) => {
+  }
+  update (request, response) {
     const { id } = request.params
     const {
       name,
@@ -68,4 +69,4 @@ const trainerController = {
     return response.status(200).json(updatedTrainer.message)
   }
 }
-module.exports = trainerController; 
+module.exports = TrainerController; 
