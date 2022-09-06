@@ -30,6 +30,7 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "sequelize-cli": "^6.4.1",
     "sucrase": "^3.25.0"
   }
 }
