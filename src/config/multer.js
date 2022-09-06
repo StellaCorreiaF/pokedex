@@ -5,7 +5,7 @@ const crypto = require('crypto');
 
 //o resolve serve para retornar o caminho da MINHA máquina e o extname  diz qual o tipo de arquivo
 const { resolve, extname } = require('path');
-const { update } = require('../app/services/UpdateLegendaryService');
+const { update } = require('../app/services/Legendary/UpdateLegendaryService');
 
 const multerConfig = multer.diskStorage(
     // o diskstorage salva o arquivo dentro da pasta, não apenas em memória

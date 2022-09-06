@@ -3,10 +3,10 @@ const multer = require('multer')
 const multerConfig = require('./config/multer')
 const legendaryValidator = require('./middlewares/LegendaryValidator');
 
-const legendaryController = require('./app/controllers/LegendaryController');
-const trainerController = require('./app/controllers/TrainerController');
+const legendaryController = require('./app/controllers/Legendary/LegendaryController');
+const trainerController = require('./app/controllers/Trainer/TrainerController');
 const updloadFileController = require('./app/controllers/UploadFileController');
-const sessionController = require('./app/controllers/SessionController');
+const sessionController = require('./app/controllers/Trainer/SessionController');
 const uploadFile = multer({ storage : multerConfig})
 
 

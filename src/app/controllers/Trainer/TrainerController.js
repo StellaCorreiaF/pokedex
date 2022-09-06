@@ -1,8 +1,8 @@
-const trainerService = require('../services/TrainerService'); 
-const create = require('../services/CreateTrainerService');
-const update = require('../services/UpdateTrainerService');
-const deleteLegendary = require('../services/DeleteTrainerService');
-const createTrainerService = require('../services/CreateTrainerService');
+const trainerService = require('../../services/Trainer/TrainerService'); 
+
+const update = require('../../services/Trainer/UpdateTrainerService');
+const deleteLegendary = require('../../services/Trainer/DeleteTrainerService');
+const createTrainerService = require('../../services/Trainer/CreateTrainerService');
 
 
 

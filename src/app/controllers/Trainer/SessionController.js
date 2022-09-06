@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
-const listTrainer  = require('../services/TrainerService');
-const controller = require('../controllers/TrainerController');
+const listTrainer  = require('../../services/Trainer/TrainerService');
+const controller = require('../Trainer/TrainerController');
 const yup = require('yup');
 
 const sessionController = {

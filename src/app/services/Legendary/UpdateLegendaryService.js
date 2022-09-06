@@ -1,4 +1,4 @@
-const list = require('../services/LegendaryService');
+const list = require('../Legendary/LegendaryService');
 const updateLegendaryService= {
     update: (
         id,

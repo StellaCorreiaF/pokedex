@@ -1,4 +1,4 @@
-const legendaryModel = require('../models/LegendaryModel');
+const legendaryModel = require('../../models/LegendaryModel');
 const { v4} = require('uuid');
 
 const createLegendaryService = {

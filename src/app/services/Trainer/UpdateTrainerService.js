@@ -1,4 +1,4 @@
-const list = require('../services/TrainerService');
+const list = require('../../services/Trainer/TrainerService');
 const updateTrainerService= {
     update: (
         id,
