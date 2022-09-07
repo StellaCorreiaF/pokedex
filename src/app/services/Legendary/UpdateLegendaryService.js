@@ -1,44 +1,62 @@
-import ListLegendariesService from "./LegendaryService";
-
+import LegendaryModel from "../../models/LegendaryModel";
 export default class UpdateLegendaryService {
-    constructor() {
-      this.service = new ListLegendariesService();
-    }
-  
-    update(
-      id,
-      name,
-      description,
-      type,
-      healthPoints,
-      specialAttack,
-      defense,
-      attack,
-      experience,
-      specialDefense
-    ) {
-      const pokemons = this.service.listAll();
-      const pokemonIndice = pokemons.findIndex((item) => item.id === Number(id));
-  
-      if (pokemonIndice === -1) {
-        return { erro: "Pokemon não encontrado" };
+  constructor() {}
+
+  async update(
+    id,
+    name,
+    description,
+    type,
+    healthPoints,
+    specialAttack,
+    defense,
+    attack,
+    experience,
+    specialDefense
+  ) {
+    try {
+      const pokemon = await LegendaryModel.findByPk(id);
+
+      if (!pokemon) {
+        return { mensagem: "Pokémon não encontrado" };
       }
-  
-      pokemons[pokemonIndice] = {
-        name,
-        description,
-        type,
-        healthPoints,
-        specialAttack,
-        defense,
-        attack,
-        experience,
-        specialDefense,
-      };
-  
-      return {
-        id,
-        ...pokemons[pokemonIndice],
-      };
+
+      const [numeroDeRegistrosAtualizados] = await LegendaryModel.update(
+        {
+          name,
+          description,
+          type,
+          healthPoints,
+          specialAttack,
+          defense,
+          attack,
+          experience,
+          specialDefense,
+        },
+        {
+          where: { id },
+        }
+      );
+
+      if (numeroDeRegistrosAtualizados === 0) {
+        return { mensagem: "Dados iguais" };
+      } else {
+        return {
+          id,
+          name,
+          description,
+          type,
+          healthPoints,
+          specialAttack,
+          defense,
+          attack,
+          experience,
+          specialDefense,
+        };
+      }
+    } catch (error) {
+      console.log(error);
+      return { erro: error.message };
     }
   }
+}
