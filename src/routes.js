@@ -1,45 +1,64 @@
-//const Router= require('express');  - Refatorando, import
-import Router from 'express';
-import multer from 'multer';
-import CreateLegendaryController from './app/controllers/Legendary/CreateLegendaryController';
-import DeleteLegendaryController from './app/controllers/Legendary/DeleteLegendaryController';
-import ListLegendaryController from './app/controllers/Legendary/ListLegendaryController';
-import UpdateLegendaryController from './app/controllers/Legendary/UpdateLegendaryController';
-import CreateTrainerController from './app/controllers/Trainer/CreateTrainerController';
-import ListAllTrainnersController from './app/controllers/Trainer/ListAllTrainersController';
-import SessionController from './app/controllers/Trainer/SessionController';
-import UpdateTrainerController from './app/controllers/Trainer/UpdateTrainerController';
-import multerConfig from './config/multer';
-import legendaryValidator from './middlewares/LegendaryValidator';
+import Router from "express";
+import multer from "multer";
+
+import multerConfig from "./config/multer";
+
+import legendaryValidator from "./middlewares/LegendaryValidator";
+
+import CreateLegendaryController from "./app/controllers/Legendary/CreateLegendaryController";
+import DeleteLegendaryController from "./app/controllers/Legendary/DeleteLegendaryController";
+import ListLegendaryController from "./app/controllers/Legendary/ListLegendaryController";
+import UpdateLegendaryController from "./app/controllers/Legendary/UpdateLegendaryController";
+
+import CreateTrainerController from "./app/controllers/Trainer/CreateTrainerController";
+import ListAllTrainersController from "./app/controllers/Trainer/ListAllTrainersController";
+import UpdateTrainerController from "./app/controllers/Trainer/UpdateTrainerController";
 
 
+import SessionController from "./app/controllers/Auth/SessionController";
+import UpdateFileController from "./app/controllers/UploadFileController";
 
-const updloadFileController = require('./app/controllers/UploadFileController');
-const uploadFile = multer({ storage : multerConfig})
+const uploadFile = multer({ storage: multerConfig });
 
+const routes = new Router();
 
-const routes = new Router(); 
+const createLegendaryController = new CreateLegendaryController();
+const listLegendaryController = new ListLegendaryController();
+const updateLegendaryController = new UpdateLegendaryController();
+const deleteLegendaryController = new DeleteLegendaryController();
 
-routes.get('/legendaries', ListLegendaryController.index); 
-routes.get('/legendaries/name', ListLegendaryController.listData);
-routes.post('/legendaries', legendaryValidator, CreateLegendaryController.create); //o middleware tem q ser alocado sempre como segundo parametro da rota
-routes.put('/legendaries/:id',UpdateLegendaryController.update);
-routes.delete('/legendaries/:id', DeleteLegendaryController.delete);
+// routes.get("/legendaries", listLegendaryController.index);
+routes.get("/legendaries", (req, res) =>
+  listLegendaryController.show(req, res)
+);
+routes.post("/legendaries", legendaryValidator, (req, res) =>
+  createLegendaryController.create(req, res)
+);
+routes.put("/legendaries/:id", (req, res) =>
+  updateLegendaryController.update(req, res)
+);
+routes.delete("/legendaries/:id", (req, res) =>
+  deleteLegendaryController.delete(req, res)
+);
 
+const listAllTrainersController = new ListAllTrainersController();
+const createTrainerController = new CreateTrainerController();
+const updateTrainerController = new UpdateTrainerController();
 
+routes.get("/trainers", (req, res) =>
+  listAllTrainersController.listAll(req, res)
+);
+routes.post("/trainers", (req, res) =>
+  createTrainerController.create(req, res)
+);
+routes.put("/trainers/:id", (req, res) =>
+  updateTrainerController.update(req, res)
+);
 
-routes.get('/trainer/name', ListAllTrainnersController.listAll);
-routes.post('/trainer', CreateTrainerController.create); 
-routes.put('/trainer/:id',UpdateTrainerController.update);
+routes.post("/uploads", uploadFile.single("file"), (req, res) =>
+  UpdateFileController.storeFile(req, res)
+);
 
+routes.post("/session", (req, res) => SessionController.create(req, res));
 
-
-routes.post('/session', SessionController.create );
-
-
-
-//quando trabalhamos com multer, precisamos de um terceiro parametro, que serve para dizer a requisição quantidade de arquivos q atualizará
-routes.post('/uploads', uploadFile.single('file'), updloadFileController.storeFile);
-
-
-module.exports = routes; 
+export default routes;
