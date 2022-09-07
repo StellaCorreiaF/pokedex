@@ -1,4 +1,4 @@
-import listTrainerService from "../../services/trainer/TrainerService";
+import listTrainerService from "../../services/Trainer/ListTrainerService";
 export default class ListAllTrainersController {
   constructor() {
     this.service = new listTrainerService;

@@ -1,7 +1,7 @@
-import legendaryService from "../../services/Legendary/LegendaryService";
+import ListLegendariesService from "../../services/Legendary/ListLegendaryService";
 export default class ListLegendaryByNameController {
     constructor() {
-      this.service = new legendaryService();
+      this.service = new ListLegendariesService();
     }
   
     index(request, response) {

@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
-import listTrainerService from "../../services/trainer/TrainerService";
+import ListTrainerService from "../../services/Trainer/ListTrainerService";
+
 
 
 export default class SessionController {
@@ -8,7 +9,7 @@ export default class SessionController {
   static create(request, response) {
     const { email, password } = request.body;
 
-    const service = new listTrainerService();
+    const service = new ListTrainerService();
     const trainer = service.listOne(email, password);
 
     if (!trainer) {
