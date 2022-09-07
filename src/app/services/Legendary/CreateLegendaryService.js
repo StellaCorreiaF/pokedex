@@ -1,22 +1,33 @@
-const legendaryModel = require('../../models/LegendaryModel');
-const { v4} = require('uuid');
+import { v4 } from "uuid";
+import LegendaryModel from "../../models/LegendaryModel";
 
-const createLegendaryService = {
-    createLegendary: (
-       name, 
-       description, 
-       type
-    ) => {
-        const newLegendary = new legendaryModel(
-        v4(),
-        name,
-        description, 
-        type   
-        );
+export default class CreateLegendaryService {
+  constructor() {}
 
-        return newLegendary;
-       
-    }  
+  create(
+    name,
+    description,
+    type,
+    healthPoints,
+    specialAttack,
+    defense,
+    attack,
+    experience,
+    specialDefense
+  ) {
+    const newLegendary = new LegendaryModel(
+      v4(),
+      name,
+      description,
+      type,
+      healthPoints,
+      specialAttack,
+      defense,
+      attack,
+      experience,
+      specialDefense
+    );
+
+    return newLegendary;
+  }
 }
-
-module.exports = createLegendaryService; 

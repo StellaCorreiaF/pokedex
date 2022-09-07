@@ -1,27 +1,57 @@
-import listTrainerService from "./TrainerService";
-const updateTrainerService= {
-    update: (
-        id,
-        name, 
-        email,
-        password
-    ) => {
-        const trainers = listTrainerService.listTrainerService();
-        const trainerIndice = trainers.findIndex(item => item.id === Number(id))
-        if(trainerIndice === -1){
-            return { erro: "Trainer não encontrado"}
-        }
-        trainers[trainerIndice] = {
-            name,
-            email, 
-            password
-        }
-        // para retornar tb o id do pokemon, podemos abrir um objeto e passar o id e depois podemos fazer um rest do trainers e pegando o indice
-        return {
-            id, 
-            ...trainers[trainerIndice]
-        }
-        
+import ListTrainerService from "./TrainerService";
+
+
+export default class UpdateTrainerService {
+  constructor() {
+    this.service = new ListTrainerService();
+  }
+
+  update(id, name, age, city) {
+    const trainers = this.service.listAll();
+
+    const updateTrainer = trainers.find((trainer) => trainer.id === id);
+    const updateTrainerIndex = trainers.findIndex(
+      (trainer) => trainer.id === id
+    );
+
+    if (!updateTrainer) {
+      return {
+        sucess: false,
+        message: "Treinador não encontrado",
+      };
     }
+
+    if (name.length < 5) {
+      return {
+        sucess: false,
+        message: "Nome precisa ter pelo menos 5 caracteres",
+      };
+    }
+
+    if (age < 15 || age >= 40) {
+      return {
+        sucess: false,
+        message: "Somente maiores de 15 e menores de 40 anos podem participar",
+      };
+    }
+
+    if (city !== "Pallet" && city !== "Vermelion") {
+      return {
+        sucess: false,
+        message: "Somente moradores de Pallet e Vermelion podem participar",
+      };
+    }
+
+    trainers[updateTrainerIndex] = {
+      id,
+      name,
+      age,
+      city,
+    };
+
+    return {
+      sucess: true,
+      message: trainers[updateTrainerIndex],
+    };
+  }
 }
-export default updateTrainerService;

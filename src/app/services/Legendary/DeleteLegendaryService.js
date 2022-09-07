@@ -1,16 +1,20 @@
-const legendaryService = require("./LegendaryService")
+import ListLegendariesService from "./LegendaryService";
 
-const deleteLegendaryService = {
-    delete: (id) => {
-        const pokemonList = legendaryService.listLegendaryService();
-        const pokemonIndice = pokemonList.findIndex(item => item.id === Number(id));
-
-        if(pokemonIndice ===-1){
-            return {erro: "Pokemon não existe"}
-        }
-        pokemonList.splice(pokemonIndice, 1)
-
-        return { mensagem: "Pokemon removido"}
+export default class DeleteLegendaryService {
+    constructor() {
+      this.service = new ListLegendariesService();
     }
-}
-module.exports = deleteLegendaryService; 
+  
+    delete(id) {
+      const pokemons = this.service.listAll();
+      const pokemonIndice = pokemons.findIndex((item) => item.id === Number(id));
+  
+      if (pokemonIndice === -1) {
+        return { erro: "Pokémon não encontrado" };
+      }
+  
+      pokemons.splice(pokemonIndice, 1);
+  
+      return { mensagem: "Pokémon removido com sucesso" };
+    }
+  }

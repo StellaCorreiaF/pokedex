@@ -1,19 +1,40 @@
-const LegendaryModel = require('../../models/LegendaryModel'); 
+import LegendaryModel from "../../models/LegendaryModel";
 
-const legendaryService = {
-    listLegendaryService: () => {
-        const pokemon = new LegendaryModel
-        (1, 'MewTwo', 'Desc', 'pokemon')
-
-        const pokemon2 = new LegendaryModel
-        (2, 'Pikachu', 'Desc', 'pokemon')
-        return [pokemon, pokemon2]
-
-    },
-    listPokemonData: (pokemonName)=> {
-        const pokemonList = legendaryService.listLegendaryService();
-        const pokemon = pokemonList.find(item => item.name === pokemonName)
-        return pokemon; 
+export default class ListLegendariesService {
+    constructor() {}
+  
+    listAll() {
+      const pokemon = new LegendaryModel(
+        1,
+        "MewTwo",
+        "Descrição",
+        "pokemon",
+        "1000,00",
+        "1000,00",
+        "1000,00",
+        "1000,00",
+        "1000,00",
+        "1000,00"
+      );
+      const pokemon2 = new LegendaryModel(
+        2,
+        "Pikachu",
+        "Descrição",
+        "pokemon",
+        "1000,00",
+        "1000,00",
+        "1000,00",
+        "1000,00",
+        "1000,00",
+        "1000,00"
+      );
+  
+      return [pokemon, pokemon2];
     }
-}
-module.exports = legendaryService; 
+  
+    listOne(pokemonName) {
+      const pokemonList = ListLegendariesService.listLegendariesService();
+      const pokemon = pokemonList.find((item) => item.name === pokemonName);
+      return pokemon;
+    }
+  }

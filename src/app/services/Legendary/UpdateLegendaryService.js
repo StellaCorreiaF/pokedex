@@ -1,27 +1,44 @@
-const list = require('../Legendary/LegendaryService');
-const updateLegendaryService= {
-    update: (
-        id,
-        name, 
-        description,
-        type
-    ) => {
-        const pokemons = list.listLegendaryService();
-        const pokemonIndice = pokemons.findIndex(item => item.id === Number(id))
-        if(pokemonIndice === -1){
-            return { erro: "pokemonIndice não encontrado"}
-        }
-        pokemons[pokemonIndice] = {
-            name,
-            description, 
-            type
-        }
-        // para retornar tb o id do pokemon, podemos abrir um objeto e passar o id e depois podemos fazer um rest do pokemons e pegando o indice
-        return {
-            id, 
-            ...pokemons[pokemonIndice]
-        }
-        
+import ListLegendariesService from "./LegendaryService";
+
+export default class UpdateLegendaryService {
+    constructor() {
+      this.service = new ListLegendariesService();
     }
-}
-module.exports = updateLegendaryService;
+  
+    update(
+      id,
+      name,
+      description,
+      type,
+      healthPoints,
+      specialAttack,
+      defense,
+      attack,
+      experience,
+      specialDefense
+    ) {
+      const pokemons = this.service.listAll();
+      const pokemonIndice = pokemons.findIndex((item) => item.id === Number(id));
+  
+      if (pokemonIndice === -1) {
+        return { erro: "Pokemon não encontrado" };
+      }
+  
+      pokemons[pokemonIndice] = {
+        name,
+        description,
+        type,
+        healthPoints,
+        specialAttack,
+        defense,
+        attack,
+        experience,
+        specialDefense,
+      };
+  
+      return {
+        id,
+        ...pokemons[pokemonIndice],
+      };
+    }
+  }
