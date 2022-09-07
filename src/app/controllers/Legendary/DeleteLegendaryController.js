@@ -1,11 +1,15 @@
 import deleteLegendaryService from "../../services/Legendary/DeleteLegendaryService";
 
-class DeleteLegendaryController {
-    constructor() { }
-    static delete(request, response) {
-        const { id } = request.params;
-        const deletedLegendary = deleteLegendaryService.delete(id)
-        response.send(deletedLegendary);
+export default class DeleteLegendaryController {
+    constructor() {
+      this.service = new deleteLegendaryService();
     }
-}
-export default DeleteLegendaryController; 
+  
+    delete(request, response) {
+      const { id } = request.params;
+  
+      const resultado = this.service.delete(id);
+  
+      response.send(resultado);
+    }
+  }

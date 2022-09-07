@@ -1,11 +1,12 @@
-import listTrainerService from "../../services/Trainer/TrainerService"
+import listTrainerService from "../../services/trainer/TrainerService";
+export default class ListAllTrainersController {
+  constructor() {
+    this.service = new listTrainerService;
+  }
 
-class ListAllTrainnersController {
-    constructor(){}
-    static listAll (request, response) {
-        const trainers = listTrainerService.listAll()
-    
-        return response.send(trainers)
-      }
+  listAll(request, response) {
+    const trainers = this.service.listAll();
+
+    return response.send(trainers);
+  }
 }
-export default ListAllTrainnersController; 

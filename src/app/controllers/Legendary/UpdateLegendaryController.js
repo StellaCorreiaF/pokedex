@@ -1,13 +1,37 @@
-import updateLegendaryService from "../../services/Legendary/UpdateLegendaryService";
+import UpdateLegendaryService from "../../services/legendary/UpdateLegendaryService";
 
-class UpdateLegendaryController {
-    constructor(){}
-   static update(request, response) {
-        const { id } = request.params; 
-        const { name, description, type}  = request.body;
-        const updatedLegendary = updateLegendaryService.update(name, description, type)
-        response.json(updatedLegendary);
+export default class UpdateLegendaryController {
+  constructor() {
+    this.service = new UpdateLegendaryService();
+  }
 
-    }
+  update(request, response) {
+    const { id } = request.params;
+    const {
+      name,
+      description,
+      type,
+      healthPoints,
+      specialAttack,
+      defense,
+      attack,
+      experience,
+      specialDefense,
+    } = request.body;
+
+    const updatedLegendary = this.service.update(
+      id,
+      name,
+      description,
+      type,
+      healthPoints,
+      specialAttack,
+      defense,
+      attack,
+      experience,
+      specialDefense
+    );
+
+    response.json(updatedLegendary);
+  }
 }
-export default UpdateLegendaryController; 

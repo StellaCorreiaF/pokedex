@@ -1,10 +1,7 @@
-const updloadFileController = {
-    storeFile : (request, response) => {
-        console.log(request.file)
-
-        response.json({mensagem: "legal"})
-
+export default class UpdateFileController {
+    static storeFile(request, response) {
+      const { filename } = request.file;
+  
+      response.json({ arquivo: filename });
     }
-}
-
-module.exports = updloadFileController; 
+  }

@@ -1,37 +1,37 @@
-import createTrainerService from "../../services/Trainer/CreateTrainerService"
+import CreateTrainerService from "../../services/trainer/CreateTrainerService";
 
-class CreateTrainerController {
+export default class CreateTrainerController {
+  constructor() {
+    this.service = new CreateTrainerService();
+  }
 
-    constructor() {}
+  create(request, response) {
+    const { name, email, password, age, city } = request.body;
 
-   static create(request, response) {
-        const {
-            name,
-            email,
-            password,
-            age
-        } = request.body
-
-        if (!name) {
-            return response.status(400).json({
-                message: "Nome é obrigatório"
-            })
-        }
-
-        if (!age) {
-            return response.status(400).json({
-                message: "Idade é obrigatório"
-            })
-        }
-
-        const createdTrainer = createTrainerService.create(name, email, password, age)
-
-        if (!createdTrainer.sucess) {
-            return response.status(400).json(createdTrainer.message)
-        }
-
-        return response.status(200).json(createdTrainer.message)
+    if (!name) {
+      return response.status(400).json({
+        message: "Nome é obrigatório",
+      });
     }
-}
 
-export default CreateTrainerController; 
+    if (!age) {
+      return response.status(400).json({
+        message: "Idade é obrigatório",
+      });
+    }
+
+    const createdTrainer = this.service.create(
+      name,
+      email,
+      password,
+      age,
+      city
+    );
+
+    if (!createdTrainer.sucess) {
+      return response.status(400).json(createdTrainer.message);
+    }
+
+    return response.status(200).json(createdTrainer.message);
+  }
+}
