@@ -1,14 +1,14 @@
 const jwt = require('jsonwebtoken');
-const listTrainer  = require('../../services/Trainer/TrainerService');
-const controller = require('../Trainer/TrainerController');
-const yup = require('yup');
+
+import yup from 'yup'
+import listTrainerService from '../../services/Trainer/TrainerService';
 
 class SessionController{
     constructor (){};
    static create(request, response) {
         const { email, password } = request.body; 
 
-        const trainer = listTrainer.findTrainer(email, password)
+        const trainer = listTrainerService.findTrainer(email, password)
 
         if(!trainer ){
             return response.status(401).json({error : "treinador não encontrado"})
@@ -29,4 +29,4 @@ class SessionController{
 
 }
 
-module.exports = SessionController; 
+export default SessionController; 
